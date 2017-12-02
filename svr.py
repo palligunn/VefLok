@@ -1,4 +1,7 @@
-from bottle import route,run, template, static_file
+from bottle import route,run, template, static_file, request, get, post
+import datetime
+import sqlite3
+import sys
 
 @route('/static/<filename:path>')
 def send_static(filename):
@@ -6,7 +9,32 @@ def send_static(filename):
 
 @route('/')
 def index():
-    return template('index.tpl')
+    # CONNECT DATABASE
+    con = sqlite3.connect('data\\todo.dat')
+    cur = con.cursor()
+    rows = cur.execute('SELECT * FROM todo ORDER BY datetime ASC')
+    return template('index.tpl', rows=rows)
+
+
+@route('/new', method=['GET', 'POST'])
+def new_task():
+    if request.POST.get('save', '').strip():
+        todotitle = request.POST.get('task')
+        tododesc = request.POST.get('desc')
+        tododatetime = datetime.datetime.now()
+
+        #CONNECT DATABASE
+        con = sqlite3.connect('data\\todo.dat')
+        cur = con.cursor()                        #(null,?,?,?)(id,name,desc,datetime)
+        rec = cur.execute('INSERT INTO todo VALUES (null,?,?,?)', (todotitle,tododesc,tododatetime))
+        con.commit()
+        rows = cur.execute('SELECT * FROM todo ORDER BY datetime ASC')
+
+        return template('index.tpl', rows=rows)
+
+    else:
+        return template('newtask.tpl')
+
 
 @route('/test')
 def index():
