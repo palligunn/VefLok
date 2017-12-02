@@ -1,3 +1,10 @@
 %rebase('base.tpl',Page_Title='Todo list')
-<h1>Uppskriftir Gúrmé Sjeff Bryngeirs</h1>
-<p>þetta er síða sem kokkurinn Gúrmé Sjeff Bryngeir opnaði til að deila með öllum uppskriftirnar sínar til að græða meiri pening.</p>
+<ul>
+	%for row in rows:
+	<li><a href="/item{{row[0]}}">{{row[1]}}</a></li>
+	%end
+</ul>
+<br>
+<form>
+	<input type="button" value="Add New Task" onclick="parent.location'/new'">
+</form>
