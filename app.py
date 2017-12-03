@@ -9,7 +9,7 @@ from sys import argv
 def send_static(filename):
     return static_file(filename, root='./static/')
 
-@route('/home')
+@route('')
 def index():
     # CONNECT DATABASE
     con = sqlite3.connect('data\\todo.dat')
