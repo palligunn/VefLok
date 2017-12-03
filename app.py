@@ -90,8 +90,12 @@ def index():
     return template('about.tpl')
 
 
-@error(404)#error síða 17-19
+@error(404)#error síða 93-95
 def error404(error):
     return('<h1>Við fundum ekki þessa síðu(404)</h1>')
+
+@error(500)# error síða 97-99
+def error500(error):
+    return('<h1>Því miður vill ekki heroku leyfa okkur að nota sqlite3 þegar það er að hosta síðuna, en vefurinn virkar annars vel, prufaðu að slá inn "/about" eða "/new"</h1>')
 
 run(host='0.0.0.0', port=argv[1])
