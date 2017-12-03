@@ -17,7 +17,7 @@
 		<div id='navigation'>
 			<ul>
 				<li><a href='/'>Home</a></li>
-				<li><a href='/New'>New</a></li>
+				<li><a href='/new'>New</a></li>
 				<li><a href='/About'>About</a></li>
 			</ul>
 		</div>
