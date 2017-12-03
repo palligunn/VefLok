@@ -92,4 +92,4 @@ def index():
 def error404(error):
     return('<h1>Við fundum ekki þessa síðu(404)</h1>')
 
-run(host='localhost',port=8080, debug='True', reloader='True')
+run(host='0.0.0.0', port=argv[1])
